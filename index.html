@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name | Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --secondary-color: #b0b0b0;
+      --link-color: #90caf9;
+      --card-color: #1e1e1e;
+      --border-color: #333;
+      --btn-bg: #90caf9;
+      --btn-text: #121212;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #1a1a1a;
+      --secondary-color: #555;
+      --link-color: #1e88e5;
+      --card-color: #f9f9f9;
+      --border-color: #ddd;
+      --btn-bg: #1e88e5;
+      --btn-text: #ffffff;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--card-color);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--secondary-color);
+    }
+
+    .hero .cta-button {
+      padding: 0.75rem 1.5rem;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero .cta-button:hover {
+      opacity: 0.9;
+    }
+
+    section {
+      margin: 4rem 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .about,
+    .projects,
+    .contact {
+      padding: 1rem;
+    }
+
+    .projects .project-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Your Name</h1>
+      <p>Creative Developer • Problem Solver • Minimalist</p>
+      <button class="cta-button">View My Work</button>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I’m a web developer passionate about clean code, intuitive design, and solving complex problems.
+        My focus is on building responsive, user-first websites and applications that blend function with elegance.
+      </p>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+      <h2>Projects</h2>
+      <div class="project-item">
+        <h3>Project Title 1</h3>
+        <p>Short description of the project and technologies used.</p>
+        <a href="#">View Project →</a>
+      </div>
+      <div class="project-item">
+        <h3>Project Title 2</h3>
+        <p>Another project description goes here.</p>
+        <a href="#">View Project →</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Let's connect! Feel free to reach out via:</p>
+      <ul>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      &copy; 2025 Your Name. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    // Apply saved or preferred theme
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      toggleBtn.textContent = '🌙 Dark Mode';
+    } else if (savedTheme === 'dark' || prefersDark) {
+      toggleBtn.textContent = '☀️ Light Mode';
+    }
+
+    // Toggle function
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      toggleBtn.textContent = isLight ? '🌙 Dark Mode' : '☀️ Light Mode';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
